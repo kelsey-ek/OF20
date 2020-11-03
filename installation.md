@@ -211,6 +211,10 @@ source ~/.bash_profile
 unzip jeus8-b162106.zip
 ```
 
+```
+cp license.bin ../jeus8/license/
+```
+
 ### 5. OF20 installation
 
 ```
