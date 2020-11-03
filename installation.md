@@ -208,7 +208,17 @@ source ~/.bash_profile
 ```
 
 ```
-unzip jeus8-b162106.zip
+mkdir jeus8
+
+cd jeus8
+
+unzip jeus8-b162106.zip 
+
+export JEUS_HOME=$HOME/jeus8
+
+chmod 775 ${JEUS_HOME}/lib/etc/ant/bin/ant
+
+${JEUS_HOME}/lib/etc/ant/bin/ant -f ${JEUS_HOME}/setup/build.xml install
 ```
 
 ```
