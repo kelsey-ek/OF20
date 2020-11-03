@@ -5,14 +5,11 @@
 + [1. Pre settings](#1-pre-settings)
 + [2. JAVA installation](#2-java-installation)
 + [3. Tibero installation](#3-tibero-installation)
-+ [4. UnixODBC installation](#4-unixodbc-installation)
-+ [5. OFCOBOL installation](#5-ofcobol-installation)
-+ [6. PROSORT installation](#136-prosort-installation)
-+ [7. Base installation](#137-base-installation)
-+ [8. Batch installation](#138-batch-installation)
-+ [9. TACF installation](#139-tacf-installation)
-+ [10. OSC installation](#1310-osc-installation)
-+ [11. JEUS installation](#1311-jeus-installation)
++ [4. JEUS installation](#4-jeus-installation)
++ [5. OF20 installation](#4-jeus-installation)
++ [5. UnixODBC installation](#5-unixodbc-installation)
++ [6. PROSORT installation](#6-prosort-installation)
+
 + [12. OFGW installation](#1312-ofgw-installation)
 + [13. OFManager installation](#1313-ofmanager-installation)
 + [14. OFMiner installation](#1314-ofminer-installation)
@@ -195,17 +192,18 @@ sh $TB_HOME/scripts/system.sh
 SYS password : tibero
 SYSCAT password : syscat
 ```
+
+### 4. JEUS installation
 ```
-tbsql tibero/tmax
+######JAVA ####
+export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk-1.7.0.261-2.6.22.2.el7_8.x86_64
+#### JEUS ####
+export JEUS_HOME=$HOME/jeus8
+export PATH="/home/of20/jeus8/bin:/home/oframe7/jeus8/lib/system:/home/oframe7/jeus8/webserver/bin:${PATH}"
+```
 
-create tablespace "DEFVOL" datafile 'DEFVOL.dbf' size 100M autoextend on;
-create tablespace "TACF00" datafile 'TACF00.dbf' size 50M  autoextend on;
-create tablespace "OFM_REPOSITORY" datafile 'OFM_REPOSITORY.dbf' size 50M  autoextend on;
-create tablespace "OFMLOG" datafile 'OFM_LOG.dbf' size 300M  autoextend on next 300M;
-create tablespace "OFMGR01" datafile 'OFMGR01.DBF'  size 100M autoextend on  next 50M;
+```
+unzip jeus8-b162106.zip
 ```
 
 
-### 4. UnixODBC installation
-
-### 5. OFCOBOL installation
