@@ -195,15 +195,57 @@ SYSCAT password : syscat
 
 ### 4. JEUS installation
 ```
+vi ~/.bash_profile
+
 ######JAVA ####
 export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk-1.7.0.261-2.6.22.2.el7_8.x86_64
+
 #### JEUS ####
 export JEUS_HOME=$HOME/jeus8
 export PATH="/home/of20/jeus8/bin:/home/oframe7/jeus8/lib/system:/home/oframe7/jeus8/webserver/bin:${PATH}"
+
+source ~/.bash_profile
 ```
 
 ```
 unzip jeus8-b162106.zip
 ```
 
+### 5. OF20 installation
+
+```
+################################################################################
+#           Configuration Sample for OpenFrame 20 Installation                 #
+#                                                                              #
+#   File : of20.install.properties.sample                                      #
+#   Date : 20200929                                                            #
+#   Version : OF20_INITIAL                                                     #
+#                                                                              #
+################################################################################
+
+########### for env ##############
+PROOBJECT_HOME=/home/of20/OpenFrame20
+
+######## for deply #########
+JEUS_HOME=/home/of20/jeus8
+JEUS_DAS_IP=192.168.55.33
+JEUS_DAS_PORT=8736
+JEUS_USER=jeus
+JEUS_PW=1111111
+SERVER_NAME=RteServer
+DOMAIN_NAME=domain1
+
+####### for db  #######
+TIBERO_USERNAME=tibero
+TIBERO_PASSWORD=tmax
+TIBERO_DBNAME=of20
+TIBERO_IP=192.168.55.33
+TIBERO_PORT=8629
+
+###### for po config ######
+HOST_NAME=of20
+PO_LISTENER=http-rtesvr
+PO_PORT=6677
+FILE_PORT=6666
+```
 
