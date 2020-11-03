@@ -19,8 +19,8 @@
 
 ### 1. Pre settings
 
-a. Required Package Installation
-
+__a.__ Required Package Installation
+```
 yum install -y wget
 yum install -y  dos2unix
 yum install -y  glibc*
@@ -31,14 +31,16 @@ yum install -y  gcc-c++
 yum install -y libncurses*
 yum install ncurses*
 yum update
+```
 
 - Packages for running tibero
-
+```
 yum install libaio
 yum install libnsl
+```
 
 - Extra Packages if needed
-
+```
 yum install strace
 yum install ltrace
 yum install gdb 
@@ -46,11 +48,163 @@ yum install nano
 yum install vim-enhanced 
 yum install git 
 yum install htop
+```
 
+__b.__ Kernel Parameters Modification 
+
+vi /etc/sysctl.conf  
+
+```bash
+kernel.shmall = 2097152
+kernel.shmmax = 4294967295
+kernel.shmmni = 4096
+kernel.sem = 100000 32000 10000 10000
+fs.file-max = 65536
+net.ipv4.ip_local_port_range = 1024 65000  
+net.core.rmem_default=262144
+net.core.wmem_default=262144
+net.core.rmem_max=262144
+net.core.wmem_max=262144
+```
+
+* Refresh the kernel parameters.
+```bash
+/sbin/sysctl -p 
+```
+
+__c.__ Firewall setting
+* Firewall does not work in the container. Instead, you can use port forwarding option(-p) when you run the container. I will talk about this later in 'use OpenFrame image' part.
+
+```
+chkconfig iptables off
+```
+
+__d.__ Prepare licenses from Technet
+* Use the correct hostname for downloading license files from Technet website.
+* You need to check hostname and the number of cores.
+
+
+__e.__ Add user as hostname
+``` 
+groupadd mqm -g 10000
+useradd -d /home/of7azure -g mqm -s /bin/bash -m of7azure -u 10001
+```
+
+```
+groupadd dba -g 10005
+useradd -d /home/oftibr -g dba -s /bin/bash -m oftibr -u 10002
+```
+
+__f.__ Add information in bash_profile
+```
+# clear screen
+clear
+
+echo ""
+echo "**********************************************"
+echo "***          ##OF20 DEMO ENV ##            ***"
+echo "**********************************************"
+echo "***              OF-CS TEAM                  *"
+echo "**********************************************"
+echo "***  account : of20                        ***"
+echo "***  Download binary : NO IMS#             ***"
+echo "***  Installed Product :                   ***"
+echo "***    - java version  1.8.0_262           ***"
+echo "***                                        ***"
+echo "***                            2020.11.03  ***"
+echo "**********************************************"
+echo ""
+```
 
 ### 2. JAVA installation
+```
+[of20@of20 ~]$ java -version
+openjdk version "1.8.0_262"
+OpenJDK Runtime Environment (build 1.8.0_262-b10)
+OpenJDK 64-Bit Server VM (build 25.262-b10, mixed mode)
+```
 
 ### 3. Tibero installation
+```bash
+tar -xzvf [tibero tar file]
+mv license.xml tibero6/license/
+```
+
+```bash
+vi .bash_profile
+
+##### Tibero #####
+export TB_HOME=/home/of20/tibero6
+export TB_SID=of20
+export PATH=$TB_HOME/bin:$TB_HOME/client/bin:$PATH
+export LD_LIBRARY_PATH=$TB_HOME/lib:$TB_HOME/client/lib:$LD_LIBRARY_PATH
+export TBCLI_GET_COREDUMP=Y
+
+source ~/.bash_profile
+```
+
+```
+sh $TB_HOME/config/gen_tip.sh
+
+vi $TB_HOME/config/$TB_SID.tip
+```
+```bash
+DB_NAME=oframe
+LISTENER_PORT=8629
+CONTROL_FILES="/home/oframe7/tbdata/c1.ctl"
+DB_CREATE_FILE_DEST="/home/oframe7/tbdata" # match the directory CONTROL_FILES
+#CERTIFICATE_FILE="/home/oframe7/tibero6/config/svr_wallet/oframe.crt"
+#PRIVKEY_FILE="/home/oframe7/tibero6/config/svr_wallet/oframe.key"
+#WALLET_FILE="/home/oframe7/tibero6/config/svr_wallet/WALLET"
+#EVENT_TRACE_MAP="/home/oframe7/tibero6/config/event.map"
+MAX_SESSION_COUNT=100
+TOTAL_SHM_SIZE=2G
+MEMORY_TARGET=3G 
+```
+```
+tbboot nomount 
+    
+tbsql sys/tibero
+
+SQL> CREATE DATABASE
+USER SYS IDENTIFIED BY TIBERO
+MAXINSTANCES 8                                            
+MAXDATAFILES 4096                                         
+CHARACTER SET MSWIN949
+LOGFILE   GROUP 1 ('redo001.redo') SIZE 512M,            
+          GROUP 2 ('redo002.redo') SIZE 512M,            
+          GROUP 3 ('redo003.redo') SIZE 512M,            
+          GROUP 4 ('redo004.redo') SIZE 512M,            
+          GROUP 5 ('redo005.redo') SIZE 512M             
+MAXLOGGROUPS 255                                          
+MAXLOGMEMBERS 8                                           
+NOARCHIVELOG                                              
+DATAFILE 'system001.dtf' SIZE 200M autoextend on maxsize 1G
+DEFAULT TABLESPACE USR                                    
+DATAFILE 'usr001.dtf' SIZE 200M  autoextend on maxsize 1G 
+DEFAULT TEMPORARY TABLESPACE TEMP                         
+TEMPFILE 'temp001.dtf' SIZE 200M autoextend on maxsize 1G 
+UNDO TABLESPACE UNDO0                                     
+DATAFILE 'undo001.dtf' SIZE 200M autoextend on maxsize 1G; 
+```
+```
+tbboot
+    
+sh $TB_HOME/scripts/system.sh 
+
+SYS password : tibero
+SYSCAT password : syscat
+```
+```
+tbsql tibero/tmax
+
+create tablespace "DEFVOL" datafile 'DEFVOL.dbf' size 100M autoextend on;
+create tablespace "TACF00" datafile 'TACF00.dbf' size 50M  autoextend on;
+create tablespace "OFM_REPOSITORY" datafile 'OFM_REPOSITORY.dbf' size 50M  autoextend on;
+create tablespace "OFMLOG" datafile 'OFM_LOG.dbf' size 300M  autoextend on next 300M;
+create tablespace "OFMGR01" datafile 'OFMGR01.DBF'  size 100M autoextend on  next 50M;
+```
+
 
 ### 4. UnixODBC installation
 
