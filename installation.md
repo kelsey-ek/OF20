@@ -2,11 +2,11 @@
 
 ## Table of Contents
 
-+ [1. Pre settings](#131-pre-settings)
-+ [2. JAVA installation](#132-java-installation)
-+ [3. Tibero installation](#133-tibero-installation)
-+ [4. UnixODBC installation](#134-unixodbc-installation)
-+ [5. OFCOBOL installation](#135-ofcobol-installation)
++ [1. Pre settings](#1-pre-settings)
++ [2. JAVA installation](#2-java-installation)
++ [3. Tibero installation](#3-tibero-installation)
++ [4. UnixODBC installation](#4-unixodbc-installation)
++ [5. OFCOBOL installation](#5-ofcobol-installation)
 + [6. PROSORT installation](#136-prosort-installation)
 + [7. Base installation](#137-base-installation)
 + [8. Batch installation](#138-batch-installation)
@@ -18,6 +18,35 @@
 + [14. OFMiner installation](#1314-ofminer-installation)
 
 ### 1. Pre settings
+
+a. Required Package Installation
+
+yum install -y wget
+yum install -y  dos2unix
+yum install -y  glibc*
+yum install -y  glibc.i686 glibc.x86_64
+yum install -y *libtermcap*
+yum install -y  gcc
+yum install -y  gcc-c++
+yum install -y libncurses*
+yum install ncurses*
+yum update
+
+- Packages for running tibero
+
+yum install libaio
+yum install libnsl
+
+- Extra Packages if needed
+
+yum install strace
+yum install ltrace
+yum install gdb 
+yum install nano 
+yum install vim-enhanced 
+yum install git 
+yum install htop
+
 
 ### 2. JAVA installation
 
