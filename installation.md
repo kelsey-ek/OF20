@@ -231,12 +231,17 @@ cp license.bin ../jeus8/license/license
 ```
 
 - Add jeus server
+
+```
+startDomainAdminServer -u jeus -p jeus
+```
+
 ```
 * Use jeusadmin console
 
 1. Start up DAS
 $startDomainAdminServer -u <user-name> -p <password>
-ex) startDomainAdminServer -u administrator -p 1111111
+ex) startDomainAdminServer -u jeus -p jeus
 
 2. Use jps command to check DAS
 $jps
@@ -245,22 +250,22 @@ $jps
 
 3. Connect to jeusadmin
 $jeusadmin -u <user-name> -p <password> -p <DAS base port>
-ex)jeusadmin -u administrator -p 1111111 -port 9736
+ex)jeusadmin -u jeus -p jeus -port 9736
 
 4. Add server2 
 [DAS]jeus_domain.adminServer> add-server <SERVER_NAME> -addr <JEUS_IP> -baseport <Server_BasePort> -node <DAS_Nodename> -jvm "-Xmx512m -XX:MaxPermSize=128m"
-ex) add-server server2 -addr 192.168.105.196 -baseport 9636 -node ofLinux64 -jvm "-Xmx512m -XX:MaxPermSize=128m"
+ex) add-server RteServer -addr 192.168.105.196 -baseport 9636 -node ofLinux64 -jvm "-Xmx512m -XX:MaxPermSize=128m"
 
 5. Add listener to server2
 [DAS]jeus_domain.adminServer> add-listener -server <SERVER_NAME> -name <LISTENER_NAME> -port <LISTENER_PORT>
-ex) add-listener -server server2 -name http-server2 -port 8087
+ex) add-listener -server RteServer -name http-server2 -port 8087
 
 6. Add http listener to server2
 [DAS]jeus_domain.adminServer> add-web-listener -name <HTTP_NAME> -server <SERVER_NAME> -slref <LISTENER_NAME> -tmin 10
-ex) add-web-listener -name http2 -server server2 -slref http-server2 -tmin 10
+ex) add-web-listener -name http2 -server RteServer -slref http-server2 -tmin 10 -tmax 10
 
 7. Restart JEUS
-Check domain.xml if server2 is successfully added.
+Check domain.xml if RteServer is successfully added.
 
 
 [Example]
@@ -283,6 +288,9 @@ Successfully changed only the XML.
 Restart the server to apply the changes.
 For detailed web connection information, use the 'show-web-engine-configuration -cn' command.
 
+
+
+startManagedServer -domain domain1 -server RteServer -u jeus -p jeus -dasurl ###.###.##.##:9736
 ```
 
 
