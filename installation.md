@@ -225,11 +225,6 @@ ${JEUS_HOME}/lib/etc/ant/bin/ant -f ${JEUS_HOME}/setup/build.xml install
 cp license.bin ../jeus8/license/license
 ```
 
-- domain.xml
-```
-
-```
-
 - Add jeus server
 
 ```
@@ -254,7 +249,7 @@ ex)jeusadmin -u jeus -p jeus -port 9736
 
 4. Add server2 
 [DAS]jeus_domain.adminServer> add-server <SERVER_NAME> -addr <JEUS_IP> -baseport <Server_BasePort> -node <DAS_Nodename> -jvm "-Xmx512m -XX:MaxPermSize=128m"
-ex) add-server RteServer -addr 192.168.105.196 -baseport 9636 -node ofLinux64 -jvm "-Xmx512m -XX:MaxPermSize=128m"
+ex) add-server RteServer -addr 192.168.55.33 -baseport 9636 -node ofLinux64 -jvm "-Xmx512m -XX:MaxPermSize=128m"
 
 5. Add listener to server2
 [DAS]jeus_domain.adminServer> add-listener -server <SERVER_NAME> -name <LISTENER_NAME> -port <LISTENER_PORT>
@@ -262,7 +257,7 @@ ex) add-listener -server RteServer -name http-server2 -port 8087
 
 6. Add http listener to server2
 [DAS]jeus_domain.adminServer> add-web-listener -name <HTTP_NAME> -server <SERVER_NAME> -slref <LISTENER_NAME> -tmin 10
-ex) add-web-listener -name http2 -server RteServer -slref http-server2 -tmin 10 -tmax 10
+ex) add-web-listener -name http2 -server RteServer -slref http-server2 -tmin 10 -tmax 100
 
 7. Restart JEUS
 Check domain.xml if RteServer is successfully added.
@@ -288,14 +283,20 @@ Successfully changed only the XML.
 Restart the server to apply the changes.
 For detailed web connection information, use the 'show-web-engine-configuration -cn' command.
 
+stopServer -u jeus -p jeus -host 192.168.96.195:9736
 
+startDomainAdminServer -u jeus -p jeus
 
 startManagedServer -domain domain1 -server RteServer -u jeus -p jeus -dasurl ###.###.##.##:9736
 ```
 
-
-
-
+```
+# JEUS alias
+alias dsboot='startDomainAdminServer -domain domain1 -u jeus -p jeus'
+alias msboot='startManagedServer -domain domain1 -server RteServer -u jeus -p jeus'
+alias msdown='stopServer -u jeus -p jeus -host 192.168.96.195:9636' -> check port number
+alias dsdown='stopServer -u jeus -p jeus -host 192.168.96.195:9736' -> check port number
+```
 
 ### 5. OF20 installation
 
