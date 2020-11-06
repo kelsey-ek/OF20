@@ -70,10 +70,11 @@ net.core.wmem_max=262144
 ```
 
 __c.__ Firewall setting
-* Firewall does not work in the container. Instead, you can use port forwarding option(-p) when you run the container. I will talk about this later in 'use OpenFrame image' part.
 
 ```
-chkconfig iptables off
+systemctl disable firewalld
+
+systemctl stop firewalld  
 ```
 
 __d.__ Prepare licenses from Technet
@@ -227,8 +228,9 @@ cp license.bin ../jeus8/license/license
 
 - Add jeus server
 
+```
 1. Start up DAS
-$ **startDomainAdminServer -u <user-name> -p <password>**
+$ startDomainAdminServer -u <user-name> -p <password>
 ex) startDomainAdminServer -u jeus -p jeus
 
 2. Use jps command to check DAS
@@ -242,15 +244,15 @@ ex)jeusadmin -u jeus -p jeus -port 9736
 
 4. Add server2 
 [DAS]jeus_domain.adminServer> add-server <SERVER_NAME> -addr <JEUS_IP> -baseport <Server_BasePort> -node <DAS_Nodename> -jvm "-Xmx512m -XX:MaxPermSize=128m"
-ex) add-server RteServer -addr 192.168.55.33 -baseport 9636 -node ofLinux64 -jvm "-Xmx512m -XX:MaxPermSize=128m"
+ex) add-server RteServer -addr 192.168.55.33 -baseport 9636 -node node1 -jvm "-Xmx512m -XX:MaxPermSize=128m"
 
 5. Add listener to server2
 [DAS]jeus_domain.adminServer> add-listener -server <SERVER_NAME> -name <LISTENER_NAME> -port <LISTENER_PORT>
-ex) add-listener -server RteServer -name http-server2 -port 8087
+ex) add-listener -server RteServer -name http-rtesvr -port 8087
 
 6. Add http listener to server2
 [DAS]jeus_domain.adminServer> add-web-listener -name <HTTP_NAME> -server <SERVER_NAME> -slref <LISTENER_NAME> -tmin 10
-ex) add-web-listener -name http2 -server RteServer -slref http-server2 -tmin 10 -tmax 100
+ex) add-web-listener -name http1 -server RteServer -slref http-rtesvr -tmin 10 -tmax 100
 
 7. Restart JEUS
 Check domain.xml if RteServer is successfully added.
@@ -276,7 +278,7 @@ Successfully changed only the XML.
 Restart the server to apply the changes.
 For detailed web connection information, use the 'show-web-engine-configuration -cn' command.
 
-stopServer -u jeus -p jeus -host 192.168.96.195:9736
+stopServer -host 192.168.55.33:9736 -u jeus -p jeus
 
 startDomainAdminServer -u jeus -p jeus
 
