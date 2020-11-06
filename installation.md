@@ -300,6 +300,8 @@ alias dsdown='stopServer -u jeus -p jeus -host 192.168.96.195:9736' -> check por
 
 ### 5. OF20 installation
 
+- **DAS should be up and the server should be down before installing OF20.**
+
 ```
 vi of20.install.properties
 ```
@@ -343,6 +345,26 @@ FILE_PORT=6666
 ```
 ./OpenFrame_20_Generic.bin -f of20.install.properties
 ```
+
+Check bash_profile after installing OF20.
+
+The contents below should be automatically added.
+
+```
+# New environment setting added by OpenFrame_20 on Fri Nov 06 11:19:05 KST 2020 1.
+# The unmodified version of this file is saved in /home/of20/.bash_profile1940443623.
+# Do NOT modify these lines; they are used to uninstall.
+PROOBJECT_HOME=/home/of20/OpenFrame20
+export PROOBJECT_HOME
+# End comments by InstallAnywhere on Fri Nov 06 11:19:05 KST 2020 1.
+```
+
+
+### 5. Uninstall OF20
+
+- **DAS should be up before uninstalling OF20.**
+
+
 
 
 
