@@ -198,11 +198,11 @@ SYSCAT password : syscat
 vi ~/.bash_profile
 
 ######JAVA ####
-export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk-1.7.0.261-2.6.22.2.el7_8.x86_64
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.el7_8.x86_64
 
 #### JEUS ####
 export JEUS_HOME=$HOME/jeus8
-export PATH="/home/of20/jeus8/bin:/home/oframe7/jeus8/lib/system:/home/oframe7/jeus8/webserver/bin:${PATH}"
+export PATH="/home/of20/jeus8/bin:/home/of20/jeus8/lib/system:/home/of20/jeus8/webserver/bin:${PATH}"
 
 source ~/.bash_profile
 ```
@@ -227,15 +227,8 @@ cp license.bin ../jeus8/license/license
 
 - Add jeus server
 
-```
-startDomainAdminServer -u jeus -p jeus
-```
-
-```
-* Use jeusadmin console
-
 1. Start up DAS
-$startDomainAdminServer -u <user-name> -p <password>
+$ **startDomainAdminServer -u <user-name> -p <password>**
 ex) startDomainAdminServer -u jeus -p jeus
 
 2. Use jps command to check DAS
