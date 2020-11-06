@@ -301,6 +301,10 @@ alias dsdown='stopServer -u jeus -p jeus -host 192.168.96.195:9736' -> check por
 ### 5. OF20 installation
 
 ```
+vi of20.install.properties
+```
+
+```
 ################################################################################
 #           Configuration Sample for OpenFrame 20 Installation                 #
 #                                                                              #
@@ -316,9 +320,9 @@ PROOBJECT_HOME=/home/of20/OpenFrame20
 ######## for deply #########
 JEUS_HOME=/home/of20/jeus8
 JEUS_DAS_IP=192.168.55.33
-JEUS_DAS_PORT=8736
+JEUS_DAS_PORT=9736
 JEUS_USER=jeus
-JEUS_PW=1111111
+JEUS_PW=jeus
 SERVER_NAME=RteServer
 DOMAIN_NAME=domain1
 
@@ -335,4 +339,10 @@ PO_LISTENER=http-rtesvr
 PO_PORT=6677
 FILE_PORT=6666
 ```
+
+```
+./OpenFrame_20_Generic.bin -f of20.install.properties
+```
+
+
 
