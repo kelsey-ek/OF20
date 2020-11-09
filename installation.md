@@ -359,7 +359,9 @@ export PROOBJECT_HOME
 
 - **DAS should be up before uninstalling OF20.**
 
+***NAT 설정 꺼줘야 함 ***
+
+*** 설치후 msdown , msboot, 재기동!***
 
 
-
-
+cd
