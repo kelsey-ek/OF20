@@ -313,11 +313,21 @@ vi of20.install.properties
 ################################################################################
 
 ########### for env ##############
+PROOBJECT_HOME=/home/of20/OpenFram################################################################################
+#           Configuration Sample for OpenFrame 20 Installation                 #
+#                                                                              #
+#   File : of20.install.properties.sample                                      #
+#   Date : 20200929                                                            #
+#   Version : OF20_INITIAL                                                     #
+#                                                                              #
+################################################################################
+
+########### for env ##############
 PROOBJECT_HOME=/home/of20/OpenFrame20
 
 ######## for deply #########
 JEUS_HOME=/home/of20/jeus8
-JEUS_DAS_IP=192.168.55.33
+JEUS_DAS_IP=192.168.55.39
 JEUS_DAS_PORT=9736
 JEUS_USER=jeus
 JEUS_PW=jeus
@@ -328,14 +338,16 @@ DOMAIN_NAME=domain1
 TIBERO_USERNAME=tibero
 TIBERO_PASSWORD=tmax
 TIBERO_DBNAME=of20
-TIBERO_IP=192.168.55.33
+TIBERO_IP=192.168.55.39
 TIBERO_PORT=8629
 
 ###### for po config ######
 HOST_NAME=of20
 PO_LISTENER=http-rtesvr
-PO_PORT=6677
+PO_PORT=8087
 FILE_PORT=6666
+
+################################################################################
 ```
 
 ```
@@ -364,5 +376,8 @@ export PROOBJECT_HOME
 
 *** 설치후 msdown , msboot, 재기동!***
 
+http://192.168.55.39:8087/TupOpenFrame/#!/project
 
-cd
+http://192.168.55.39:8087/OpenframeProject/
+
+
