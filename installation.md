@@ -288,9 +288,10 @@ startManagedServer -domain domain1 -server RteServer -u jeus -p jeus -dasurl ###
 ```
 # JEUS alias
 alias dsboot='startDomainAdminServer -domain domain1 -u jeus -p jeus'
-alias msboot='startManagedServer -domain domain1 -server RteServer -u jeus -p jeus'
-alias msdown='stopServer -u jeus -p jeus -host 192.168.96.195:9636' -> check port number
-alias dsdown='stopServer -u jeus -p jeus -host 192.168.96.195:9736' -> check port number
+alias msboot='startManagedServer -domain domain1 -server RteServer -u jeus -p jeus -dasurl 192.168.55.39:9736'
+alias msdown='stopServer -u jeus -p jeus -host 192.168.55.39:9636'
+alias dsdown='stopServer -u jeus -p jeus -host 192.168.55.39:9736'
+
 ```
 
 ### 5. OF20 installation
