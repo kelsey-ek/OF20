@@ -19,32 +19,32 @@
 __a.__ Required Package Installation
 ```
 yum install -y wget
-yum install -y  dos2unix
-yum install -y  glibc*
-yum install -y  glibc.i686 glibc.x86_64
-yum install -y *libtermcap*
-yum install -y  gcc
-yum install -y  gcc-c++
+yum install -y dos2unix
+yum install -y glibc*
+yum install -y glibc.i686 glibc.x86_64
+yum install -y libtermcap*
+yum install -y gcc
+yum install -y gcc-c++
 yum install -y libncurses*
-yum install ncurses*
+yum install -y ncurses*
 yum update
 ```
 
 - Packages for running tibero
 ```
-yum install libaio
-yum install libnsl
+yum install -y libaio
+yum install -y libnsl
 ```
 
 - Extra Packages if needed
 ```
-yum install strace
-yum install ltrace
-yum install gdb 
-yum install nano 
-yum install vim-enhanced 
-yum install git 
-yum install htop
+yum install -y strace
+yum install -y ltrace
+yum install -y gdb 
+yum install -y nano 
+yum install -y vim-enhanced 
+yum install -y git 
+yum install -y htop
 ```
 
 __b.__ Kernel Parameters Modification 
