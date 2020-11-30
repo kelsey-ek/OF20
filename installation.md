@@ -313,19 +313,9 @@ vi of20.install.properties
 ################################################################################
 
 ########### for env ##############
-PROOBJECT_HOME=/home/of20/OpenFram################################################################################
-#           Configuration Sample for OpenFrame 20 Installation                 #
-#                                                                              #
-#   File : of20.install.properties.sample                                      #
-#   Date : 20200929                                                            #
-#   Version : OF20_INITIAL                                                     #
-#                                                                              #
-################################################################################
-
-########### for env ##############
 PROOBJECT_HOME=/home/of20/OpenFrame20
 
-######## for deply #########
+######## for deploy #########
 JEUS_HOME=/home/of20/jeus8
 JEUS_DAS_IP=192.168.55.39
 JEUS_DAS_PORT=9736
